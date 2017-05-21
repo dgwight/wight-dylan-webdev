@@ -3,5 +3,9 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 70px;
+}
+
+.navbar-inverse {
+    background-color: #2886CF;
 }
