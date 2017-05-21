@@ -7,16 +7,17 @@ module.exports = function(app)
     var connectionString = 'mongodb://127.0.0.1:27017/test';
 
     if(process.env.MLAB_USERNAME_WEBDEV) {
-	var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
-    	var password = process.env.MLAB_PASSWORD_WEBDEV;
-    	connectionString = 'mongodb://' + username + ':' + password;
-    	connectionString += '@ds137101.mlab.com:37101/heroku_dzpfc8qg'; // user yours	
+	     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
+       var password = process.env.MLAB_PASSWORD_WEBDEV;
+    	 connectionString = 'mongodb://' + username + ':' + password;
+       connectionString += '@ds137101.mlab.com:37101/heroku_dzpfc8qg'; // user yours
     }
 
     var mongoose = require("mongoose");
     mongoose.connect(connectionString);
 
     var TestSchema = mongoose.Schema({
+        _id: Number,
         message: String
     });
 
