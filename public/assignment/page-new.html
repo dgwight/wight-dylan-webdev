@@ -2,9 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>New Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
 </head>
 <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a href="page-list.html" class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+        <a class="navbar-brand" href="#">New Page</a>
+        <div class="navbar-text pull-right">
+            <a href="page-list.html" class="navbar-link">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <section class="intro">
+            <div class="col-xs-3 hidden-xs sidebar">
+                <ul class="list-group">
+                    <li><a href="widget-list.html">
+                        Blog Post
+                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+                    </a></li>
+                    <li><a href="widget-list.html">
+                        Blogs
+                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+                    </a></li>
+                    <li><a href="widget-list.html">
+                        Home
+                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+                    </a></li>
+                    <li><a href="widget-list.html">
+                        About
+                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+                    </a></li>
+                    <li><a href="widget-list.html">
+                        Contact Us
+                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+                    </a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Page Name">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="Page Title">
+                </div>
+            </div>
+    </section>
+</div>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-text pull-right">
+            <a href="profile.html" class="navbar-link">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>
 
 </body>
 </html>
