@@ -10,6 +10,27 @@ body {
     background-color: #2886CF;
 }
 
+.navbar-inverse .navbar-link {
+    color: white;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+.navbar-widget {
+    background-color: #dddddd;
+    border-color: #888888;
+}
+
+.navbar-widget .navbar-link {
+    color: #444444;
+}
+
+.navbar-widget .navbar-brand {
+    color: #888888;
+}
+
 ul {
     list-style-type: none;
 }
@@ -20,4 +41,9 @@ li {
 
 .float-right {
     float: right;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
 }
