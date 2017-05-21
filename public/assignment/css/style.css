@@ -9,3 +9,7 @@ body {
 .navbar-inverse {
     background-color: #2886CF;
 }
+
+ul {
+    list-style-type: none;
+}
