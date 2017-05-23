@@ -8,16 +8,23 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController);
 
-    function LoginController() {
+    function LoginController($scope) {
+        var vm = this;
 
     }
 
-    function RegisterController() {
+    function RegisterController($scope) {
+        var vm = this;
 
     }
 
-    function ProfileController() {
-
+    function ProfileController($routeParams, UserService) {
+        var vm = this;
+        vm.userId = $routeParams["userId"];
+        function init() {
+            vm.user = UserService.findUserById(vm.userId);
+        }
+        init();
     }
 
 })();
