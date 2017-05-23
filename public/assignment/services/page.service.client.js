@@ -44,7 +44,7 @@
 
         function updatePage(pageId, page) {
             for (p in pages) {
-                if (p._id === page) {
+                if (p._id === pageId) {
                     p = page;
                     return;
                 }
