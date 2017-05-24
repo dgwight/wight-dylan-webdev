@@ -24,7 +24,7 @@
         return api;
 
         function createUser(user) {
-            user._id = user._id ? user._id : new Date().valueOf();
+            user._id = user._id ? user._id : new Date().getTime() + "";
             console.log(user._id);
             users.push(user);
             return user;

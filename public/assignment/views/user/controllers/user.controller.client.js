@@ -28,7 +28,7 @@
 
         function register(user) {
             if (user.passord !== user.passwordConfirm) {
-                alert("Passwords do not match");
+                vm.alert = "Passwords do not match";
                 return;
             }
             if (UserService.findUserByUsername(user.username)) {
@@ -48,9 +48,9 @@
         var vm = this;
         vm.update = update;
 
-        vm.userId = $routeParams["uid"];
+        vm.uid = $routeParams["uid"];
         function init() {
-            vm.user = UserService.findUserById(vm.userId);
+            vm.user = UserService.findUserById(vm.uid);
         }
 
         init();
