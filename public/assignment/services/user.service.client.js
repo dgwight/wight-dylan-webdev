@@ -5,6 +5,7 @@
     angular
         .module("WebAppMaker")
         .factory("UserService", UserService);
+
     function UserService() {
         var users = [
             {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
@@ -23,44 +24,47 @@
         return api;
 
         function createUser(user) {
-            users.append(user);
+            user._id = user._id ? user._id : new Date().valueOf();
+            console.log(user._id);
+            users.push(user);
+            return user;
         }
 
         function findUserById(id) {
-            for (user in users) {
-                if (user._id === id)
-                    return user;
+            for (var i = 0; i < users.length; i++) {
+                if (users[i]._id === id)
+                    return users[i];
             }
             return null;
         }
 
         function findUserByUsername(username) {
-            for (user in users) {
-                if (user.username === username)
-                    return user;
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].username === username)
+                    return users[i];
             }
             return null;
         }
 
         function findUserByCredentials(username, password) {
-            for (user in users) {
-                if (user.username === username && user.password === password)
-                    return user;
+            for (var i = 0; i < users.length; i++) {
+                if (users[i].username === username && users[i].password === password)
+                    return users[i];
             }
             return null;
         }
 
         function updateUser(userId, user) {
-            for (u in users) {
-                if (u._id === userId) {
-                    u = user;
+            for (var i = 0; i < users.length; i++) {
+                if (users[i]._id === userId) {
+                    users[i] = user;
                     return;
                 }
             }
         }
 
         function deleteUser(userId) {
-            for (var i = 0; i < users.length - 1; i++) {
+            for (var i = 0; i < users.length; i++) {
                 if (users[i]._id === userId) {
                     users.splice(i, 1);
                 }

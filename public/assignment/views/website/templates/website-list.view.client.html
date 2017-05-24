@@ -16,10 +16,14 @@
 
 <div class="container">
     <ul class="list-group">
-        <li><a href="page-list.html">
-            Address Book App
-            <a href="website-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-        </a></li>
+        <div ng-repeat="website in model.websites">
+            <li><a href="page-list.html">
+                {{website.name}}
+                <a href="website-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+            </a></li>
+        </div>
+
+
         <li><a href="page-list.html">
             Blogger
             <a href="website-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
