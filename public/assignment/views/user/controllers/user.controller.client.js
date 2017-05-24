@@ -57,7 +57,6 @@
 
         function update(user) {
             UserService.updateUser(user._id, user);
-            console.log(user);
         }
     }
 

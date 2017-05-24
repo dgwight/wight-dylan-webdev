@@ -26,37 +26,37 @@
 
         function createWebsite(userid, website) {
             website.developerId = userid;
-            websites.append(website);
+            websites.push(website);
         }
 
         function findWebsitesByUser(userId) {
             var userWebsites = [];
-            for (website in websites) {
-                if (website.developerId === userId)
-                    userWebsites.append(website);
+            for (var i = 0; i < websites.length; i++) {
+                if (websites[i].developerId === userId)
+                    userWebsites.push(websites[i]);
             }
             return userWebsites;
         }
 
         function findWebsiteById(websiteId) {
-            for (website in websites) {
-                if (website._id === websiteId)
-                    return website;
+            for (var i = 0; i < websites.length; i++) {
+                if (websites[i]._id === websiteId)
+                    return websites[i];
             }
             return null;
         }
 
         function updateWebsite(websiteId, website) {
-            for (ws in websites) {
-                if (ws._id === websiteId) {
-                    ws = website;
+            for (var i = 0; i < websites.length; i++) {
+                if (websites[i]._id === websiteId) {
+                    websites[i] = website;
                     return;
                 }
             }
         }
 
         function deleteWebsite(websiteId) {
-            for (var i = 0; i < websites.length - 1; i++) {
+            for (var i = 0; i < websites.length; i++) {
                 if (websites[i]._id === websiteId) {
                     websites.splice(i, 1);
                 }
