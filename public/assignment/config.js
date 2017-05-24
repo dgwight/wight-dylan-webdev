@@ -59,7 +59,7 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/:pid", {
-                templateUrl: "/views/page/templates/page-edit.view.client.html",
+                templateUrl: "views/page/templates/page-edit.view.client.html",
                 controller: "EditPageController",
                 controllerAs: "model"
             })

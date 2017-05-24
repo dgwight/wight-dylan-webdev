@@ -21,40 +21,42 @@
         return api;
 
         function createPage(websiteId, page) {
+            page._id = page._id ? page._id : new Date().getTime() + "";
             page.websiteId = websiteId;
-            pages.append(page);
+            pages.push(page);
+            return page;
         }
 
         function findPageByWebsiteId(websiteId) {
             var websitePages = [];
-            for (page in pages) {
-                if (page.websiteId === websiteId)
-                    websitePages.append(website);
+            for (var i = 0; i < pages.length; i++) {
+                if (pages[i].websiteId === websiteId)
+                    websitePages.push(pages[i]);
             }
             return websitePages;
         }
 
         function findPageById(pageId) {
-            for (page in pages) {
-                if (page._id === pageId)
-                    return page;
+            for (var i = 0; i < pages.length; i++) {
+                if (pages[i]._id === pageId)
+                    return pages[i];
             }
             return null;
         }
 
         function updatePage(pageId, page) {
-            for (p in pages) {
-                if (p._id === pageId) {
-                    p = page;
-                    return;
+            for (var i = 0; i < pages.length; i++) {
+                if (pages[i]._id === pageId) {
+                    pages[i] = page;
+                    return pages[i];
                 }
             }
         }
 
         function deletePage(pageId) {
-            for (var i = 0; i < pages.length - 1; i++) {
+            for (var i = 0; i < pages.length; i++) {
                 if (pages[i]._id === pageId) {
-                    websites.splice(i, 1);
+                    pages.splice(i, 1);
                 }
             }
         }
