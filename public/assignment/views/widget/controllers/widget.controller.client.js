@@ -8,18 +8,35 @@
         .controller("NewWidgetController", NewWidgetController)
         .controller("EditWidgetController", EditWidgetController);
 
-    function WidgetListController($routeParams, WidgetService) {
+    function WidgetListController($routeParams, WidgetService, $sce) {
 
         var vm = this;
         vm.uid = $routeParams["uid"];
         vm.wid = $routeParams["wid"];
         vm.pid = $routeParams["pid"];
 
+        vm.trustThisContent = trustThisContent;
+        vm.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
+
+
         function init() {
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
         }
 
         init();
+
+        function trustThisContent(html) {
+            //TODO: diligence to scrub any unsafe content
+            return $sce.trustAsHtml(html);
+        }
+
+        function getYoutubeEmbedUrl(youTubeLink) {
+            var embedUrl = 'https://youtube.com/embed/';
+            var youTubeLinkParts = youTubeLink.split('/');
+            var id = youTubeLinkParts[youTubeLinkParts.length - 1];
+            embedUrl = embedUrl + id;
+            return $sce.trustAsResourceUrl(embedUrl);
+        }
     }
 
     function NewWidgetController($routeParams, $location, WidgetService) {
@@ -34,7 +51,6 @@
         function createWidget(widget) {
             widget = WidgetService.createWidget(vm.pid, widget);
             if (widget) {
-                console.log(widget);
                 $location.url("/user/" + vm.uid + "/website/"  + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
             } else {
                 vm.error = "Unable to create widget";
@@ -71,7 +87,6 @@
         function createWidget(widget) {
             widget = WidgetService.createWidget(vm.pid, widget);
             if (widget) {
-                console.log(widget);
                 $location.url("/user/" + vm.uid + "/website/"  + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
             } else {
                 vm.error = "Unable to create widget";

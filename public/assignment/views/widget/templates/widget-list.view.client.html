@@ -23,6 +23,8 @@
             <div ng-switch-when="IMAGE">
                 <ng-include src="'views/widget/templates/widget-image.view.client.html'"></ng-include>
             </div>
+            <div ng-switch-when="HTML" ng-bind-html="model.trustThisContent(widget.text)">
+            </div>
             <div ng-switch-when="YOUTUBE">
                 <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></ng-include>
             </div>
@@ -34,12 +36,12 @@
 
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="profile.html" class="navbar-link">
+            <a class="navbar-link">
                 <span class="glyphicon glyphicon-play"></span>
             </a>
         </div>
         <div class="navbar-text pull-left">
-            <a href="profile.html" class="navbar-link">
+            <a class="navbar-link">
                 <span class="glyphicon glyphicon-eye-open"></span>
             </a>
         </div>
