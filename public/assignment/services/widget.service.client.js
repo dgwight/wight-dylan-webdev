@@ -27,38 +27,41 @@
         return api;
 
         function createWidget(pageId, widget) {
+            widget._id = widget._id ? widget._id : new Date().getTime() + "";
             widget.pageId = pageId;
-            widgets.append(widget);
+            pages.push(widget);
+            return widget;
         }
 
         function findWidgetsByPageId(pageId) {
             var pageWidgets = [];
-            for (widget in widgets) {
-                if (widget.pageId === pageId)
-                    pageWidgets.append(widget);
+            for (var i = 0; i < widgets.length; i++) {
+                if (widgets[i].pageId === pageId)
+                    pageWidgets.push(widgets[i]);
             }
             return pageWidgets;
         }
 
         function findWidgetById(widgetId) {
-            for (widget in widgets) {
-                if (widget._id === widgetId)
-                    return widget;
+            for (var i = 0; i < widgets.length; i++) {
+                if (widgets[i]._id === widgetId)
+                    return widgets[i];
             }
             return null;
         }
 
         function updateWidget(widgetId, widget) {
-            for (w in widgets) {
-                if (w._id === widgetId) {
-                    w = widget;
+            return widget;
+            for (var i = 0; i < widgets.length; i++) {
+                if (widgets[i]._id === widgetId) {
+                    widgets[i] = widget;
                     return;
                 }
             }
         }
 
         function deleteWidget(widgetId) {
-            for (var i = 0; i < widgets.length - 1; i++) {
+            for (var i = 0; i < widgets.length; i++) {
                 if (widgets[i]._id === widgetId) {
                     widgets.splice(i, 1);
                 }

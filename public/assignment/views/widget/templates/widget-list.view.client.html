@@ -15,56 +15,19 @@
 </nav>
 
 <div class="container">
-    <ul class="list-group">
-        <li>
-            <div class="float-right">
-                <a href="widget-heading.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+    <div ng-repeat="widget in model.widgets">
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADING">
+                <ng-include src="'views/widget/templates/widget-heading.view.client.html'"></ng-include>
             </div>
-            <h2>GIZMODO</h2>
-        </li>
-        <li>
-            <div class="float-right">
-                <a href="widget-heading.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="'views/widget/templates/widget-image.view.client.html'"></ng-include>
             </div>
-            <h4>US Senate does something about zika virus</h4>
-        </li>
-        <li>
-            <div class="float-right">
-                <a href="widget-image.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></ng-include>
             </div>
-            <img src="https://scontent.xx.fbcdn.net/v/t34.0-12/18600897_10154726027854117_1463620229_n.jpg?_nc_ad=z-m&oh=8a8cecc39c24820f90bb8a1fd6e6f94a&oe=5922ED47"
-                 class="img-fluid" alt="Photo of Dylan">
-        </li>
-        <li>
-            <div class="float-right">
-                <a href="widget-heading.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
-            </div>
-            <p>A great deal of the concern of displaying content for humans is the how content is layed out. From top to bottom, left to right, columns and rows, indentations and hierarchies - organizing content to effectively convey content is crucial to draw attention to various portions of a Web page. The Layout lecture covers various HTML and CSS techniques to layout Web pages. </p>
-        </li>
-        <li>
-            <div class="float-right">
-                <a href="widget-youtube.html">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
-            </div>
-            <div class="embed-responsive embed-responsive-4by3">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/XGSy3_Czz8k"></iframe>
-            </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
 
 <nav class="navbar navbar-widget navbar-fixed-bottom">

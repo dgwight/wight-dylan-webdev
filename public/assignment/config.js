@@ -81,7 +81,7 @@
 
 
             .when("/widget-heading", {
-                templateUrl: "views/widget/templates/widget-heading.view.client.html",
+                templateUrl: "views/widget/templates/widget-heading-edit.view.client.html",
                 controller: "WebsiteListController",
                 controllerAs: "model"
             })
