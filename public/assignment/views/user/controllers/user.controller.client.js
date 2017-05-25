@@ -50,7 +50,14 @@
 
         vm.uid = $routeParams["uid"];
         function init() {
-            vm.user = UserService.findUserById(vm.uid);
+            var user = UserService.findUserById(vm.uid);
+            vm.user = {
+                "_id": user._id,
+                "username": user.username,
+                "firstName": user.firstName,
+                "lastName": user.lastName,
+                "email": user.email
+            };
         }
 
         init();

@@ -53,7 +53,13 @@
         vm.deletePage = deletePage;
 
         function init() {
-            vm.page = PageService.findPageById(vm.pid);
+            var page = UserService.findUserById(vm.uid);
+            vm.page = {
+                "_id": page._id,
+                "title": page.title,
+                "websiteId": page.websiteId,
+                "description": page.description
+            };
             vm.pages = PageService.findPageByWebsiteId(vm.wid);
         }
 

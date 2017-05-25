@@ -19,7 +19,6 @@
         vm.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
         vm.getUrlForWidgetType = getUrlForWidgetType;
 
-
         function init() {
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
         }
@@ -73,7 +72,17 @@
         vm.createWidget = createWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.wgid);
+            widget = WidgetService.findWidgetById(vm.wgid);
+            vm.widget = {
+                "_id": widget._id,
+                "name": widget.name,
+                "widgetType": widget.widgetType,
+                "pageId": widget.pageId,
+                "size": widget.size,
+                "text": widget.text,
+                "width": widget.width,
+                "url": widget.url
+            };
         }
 
         init();

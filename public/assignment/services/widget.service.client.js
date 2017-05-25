@@ -51,12 +51,10 @@
         }
 
         function updateWidget(widgetId, widget) {
-            console.log(widget);
-            return widget;
             for (var i = 0; i < widgets.length; i++) {
                 if (widgets[i]._id === widgetId) {
                     widgets[i] = widget;
-                    return;
+                    return widgets[i];
                 }
             }
         }

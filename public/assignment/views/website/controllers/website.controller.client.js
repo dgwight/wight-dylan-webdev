@@ -45,13 +45,19 @@
 
         function init() {
             vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
-            vm.website = WebsiteService.findWebsiteById(vm.wid);
+            var website = WebsiteService.findWebsiteById(vm.wid);
+            vm.website = {
+                "_id": website._id,
+                "name": website.name,
+                "developerId": website.developerId,
+                "description": website.description
+            };
         }
 
         init();
 
         function updateWebsite(website) {
-            website = WebsiteService.updateWebsite(vm.uid, website);
+            website = WebsiteService.updateWebsite(vm.wid, website);
             if (website) {
                 $location.url("/user/" + vm.uid + "/website/");
             }
