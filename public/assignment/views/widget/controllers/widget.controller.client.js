@@ -26,8 +26,36 @@
 
     }
 
-    function EditWidgetController() {
+    function EditWidgetController($routeParams, $location, WidgetService) {
 
+        var vm = this;
+        vm.uid = $routeParams["uid"];
+        vm.wid = $routeParams["wid"];
+        vm.pid = $routeParams["pid"];
+        vm.wgid = $routeParams["wgid"];
+        vm.updateWidget = updateWidget;
+        vm.deleteWidget = deleteWidget;
+
+        function init() {
+            vm.widget = WidgetService.findWidgetById(vm.wgid);
+            console.log(vm.widget);
+        }
+
+        init();
+
+        function updateWidget(widget) {
+            widget = WidgetService.updateWidget(vm.wgid, widget);
+            if (widget) {
+                $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/");
+            } else {
+                vm.error = "Unable to edit widget";
+            }
+        }
+
+        function deleteWidget() {
+            WidgetService.deleteWidget(vm.wgid);
+            $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/");
+        }
     }
 
 })();

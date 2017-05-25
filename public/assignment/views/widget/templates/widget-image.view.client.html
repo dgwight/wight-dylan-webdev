@@ -1,8 +1,7 @@
 <div class="float-right">
-    <a href="widget-image.html">
+    <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}">
         <span class="glyphicon glyphicon-cog"></span>
     </a>
     <span class="glyphicon glyphicon-align-justify"></span>
 </div>
-<img src="https://scontent.xx.fbcdn.net/v/t34.0-12/18600897_10154726027854117_1463620229_n.jpg?_nc_ad=z-m&oh=8a8cecc39c24820f90bb8a1fd6e6f94a&oe=5922ED47"
-     class="img-fluid" alt="Photo of Dylan">
+<img src="{{widget.url}}" class="img-fluid" width="{{widget.width}}">

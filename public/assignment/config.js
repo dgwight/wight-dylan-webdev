@@ -47,7 +47,6 @@
                 controller: "EditWebsiteController",
                 controllerAs: "model"
             })
-
             .when("/user/:uid/website/:wid/page", {
                 templateUrl: "views/page/templates/page-list.view.client.html",
                 controller: "PageListController",
@@ -76,23 +75,6 @@
             .when("/user/:uid/website/:wid/page/:pid/widget/:wgid", {
                 templateUrl: "views/widget/templates/widget-edit.view.client.html",
                 controller: "EditWidgetController",
-                controllerAs: "model"
-            })
-
-
-            .when("/widget-heading", {
-                templateUrl: "views/widget/templates/widget-heading-edit.view.client.html",
-                controller: "WebsiteListController",
-                controllerAs: "model"
-            })
-            .when("/widget-image", {
-                templateUrl: "views/widget/templates/widget-image.view.client.html",
-                controller: "WebsiteListController",
-                controllerAs: "model"
-            })
-            .when("/widget-youtube", {
-                templateUrl: "views/widget/templates/widget-youtube.view.client.html",
-                controller: "WebsiteListController",
                 controllerAs: "model"
             })
     }
