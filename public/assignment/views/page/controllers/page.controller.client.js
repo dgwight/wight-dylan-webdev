@@ -28,6 +28,12 @@
 
         vm.createPage = createPage;
 
+        function init() {
+            vm.pages = PageService.findPageByWebsiteId(vm.wid);
+        }
+
+        init();
+
         function createPage(page) {
             page = PageService.createPage(vm.wid, page);
             if (page) {
@@ -48,6 +54,7 @@
 
         function init() {
             vm.page = PageService.findPageById(vm.pid);
+            vm.pages = PageService.findPageByWebsiteId(vm.wid);
         }
 
         init();

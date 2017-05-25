@@ -1,14 +1,15 @@
 <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" class="form-control" id="name" placeholder="Heading Name">
+    <input ng-model="model.widget.name"
+           type="text" class="form-control" id="name" placeholder="Heading Name">
 </div>
 <div class="form-group">
     <label for="text">Text</label>
-    <input type="text" class="form-control" id="text" placeholder="Heading Text">
+    <input ng-model="model.widget.text"
+           type="text" class="form-control" id="text" placeholder="Heading Text">
 </div>
 <div class="form-group">
     <label for="size">Size</label>
-    <input type="number" class="form-control" id="size" placeholder="4">
+    <input ng-model="model.widget.size"
+           type="number" class="form-control" id="size" placeholder="4">
 </div>
-<a class="btn btn-danger btn-block"
-   href="widget-list.html">Delete</a>

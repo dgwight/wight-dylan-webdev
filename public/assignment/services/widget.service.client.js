@@ -29,7 +29,7 @@
         function createWidget(pageId, widget) {
             widget._id = widget._id ? widget._id : new Date().getTime() + "";
             widget.pageId = pageId;
-            pages.push(widget);
+            widgets.push(widget);
             return widget;
         }
 
@@ -51,6 +51,7 @@
         }
 
         function updateWidget(widgetId, widget) {
+            console.log(widget);
             return widget;
             for (var i = 0; i < widgets.length; i++) {
                 if (widgets[i]._id === widgetId) {

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-widget navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
-            <a href="widget-list.html" class="navbar-link">
+            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link">
                 <span class="glyphicon glyphicon-chevron-left"></span>
             </a>
         </div>
@@ -11,34 +11,34 @@
 
 <div class="container">
     <ul class="list-group">
-        <li><a href="widget-heading.html">
+        <li><a ng-click="model.createWidget({'widgetType': 'HEADING'})">
             Header
         </a></li>
-        <li><a href="widget-heading.html">
+        <li><a>
             Label
         </a></li>
-        <li><a href="widget-heading.html">
+        <li><a>
             HTML
         </a></li>
-        <li><a href="widget-heading.html">
+        <li><a >
             Text Input
         </a></li>
-        <li><a href="widget-heading.html">
+        <li><a>
             Link
         </a></li>
-        <li><a href="widget-heading.html">
+        <li><a>
             Button
         </a></li>
-        <li><a href="widget-image.html">
+        <li><a ng-click="model.createWidget({'widgetType': 'IMAGE'})">
             Image
         </a></li>
-        <li><a href="widget-youtube.html">
+        <li><a ng-click="model.createWidget({'widgetType': 'YOUTUBE'})">
             Youtube
         </a></li>
-        <li><a href="widget-heading.html">
+        <li><a>
             Data Table
         </a></li>
-        <li><a href="widget-heading.html">
+        <li><a>
             Repeater
         </a></li>
     </ul>

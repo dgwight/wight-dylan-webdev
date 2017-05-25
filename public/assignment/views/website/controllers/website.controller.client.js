@@ -23,6 +23,11 @@
 
         vm.createWebsite = createWebsite;
 
+        function init() {
+            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
+        }
+        init();
+
         function createWebsite(website) {
             website = WebsiteService.createWebsite(vm.uid, website);
             if (website) {
@@ -41,6 +46,7 @@
         vm.deleteWebsite = deleteWebsite;
 
         function init() {
+            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
             vm.website = WebsiteService.findWebsiteById(vm.wid);
         }
 

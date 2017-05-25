@@ -18,26 +18,13 @@
     <section class="intro">
             <div class="col-xs-3 hidden-xs sidebar">
                 <ul class="list-group">
-                    <li><a href="widget-list.html">
-                        Blog Post
-                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
-                    <li><a href="widget-list.html">
-                        Blogs
-                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
-                    <li><a href="widget-list.html">
-                        Home
-                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
-                    <li><a href="widget-list.html">
-                        About
-                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
-                    <li><a href="widget-list.html">
-                        Contact Us
-                        <a href="page-edit.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
+                    <div ng-repeat="page in model.pages">
+                        <li><a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{page._id}}/widget">
+                            {{page.name}}
+                            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{page._id}}"
+                               class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+                        </a></li>
+                    </div>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-9">

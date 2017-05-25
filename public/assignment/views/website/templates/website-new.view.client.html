@@ -19,22 +19,12 @@
         <row>
             <div class="col-xs-3 hidden-xs sidebar">
                 <ul class="list-group">
-                    <li><a href="#">
-                        Address Book App
-                        <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
-                    <li><a href="#">
-                        Blogger
-                        <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
-                    <li><a href="#">
-                        Blogging App
-                        <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
-                    <li><a href="#">
-                        Script Testing App
-                        <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-                    </a></li>
+                    <div ng-repeat="website in model.websites">
+                        <li><a href="#/user/{{model.uid}}/website/{{website._id}}/page">
+                            {{website.name}}
+                            <a href="#/user/{{model.uid}}/website/{{website._id}}" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+                        </a></li>
+                    </div>
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-9">
