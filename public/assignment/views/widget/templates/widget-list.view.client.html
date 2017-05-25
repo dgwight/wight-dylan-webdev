@@ -16,19 +16,7 @@
 
 <div class="container">
     <div ng-repeat="widget in model.widgets">
-        <div ng-switch="widget.widgetType">
-            <div ng-switch-when="HEADING">
-                <ng-include src="'views/widget/templates/widget-heading.view.client.html'"></ng-include>
-            </div>
-            <div ng-switch-when="IMAGE">
-                <ng-include src="'views/widget/templates/widget-image.view.client.html'"></ng-include>
-            </div>
-            <div ng-switch-when="HTML" ng-bind-html="model.trustThisContent(widget.text)">
-            </div>
-            <div ng-switch-when="YOUTUBE">
-                <ng-include src="'views/widget/templates/widget-youtube.view.client.html'"></ng-include>
-            </div>
-        </div>
+        <ng-include ng-init="tmplUrl = model.getUrlForWidgetType(widget.widgetType);" src="tmplUrl"></ng-include>
     </div>
 </div>
 

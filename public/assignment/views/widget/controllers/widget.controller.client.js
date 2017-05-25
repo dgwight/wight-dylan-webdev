@@ -17,6 +17,7 @@
 
         vm.trustThisContent = trustThisContent;
         vm.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
+        vm.getUrlForWidgetType = getUrlForWidgetType;
 
 
         function init() {
@@ -37,6 +38,10 @@
             embedUrl = embedUrl + id;
             return $sce.trustAsResourceUrl(embedUrl);
         }
+
+        function getUrlForWidgetType(type) {
+            return 'views/widget/templates/widget-' + type.toLowerCase() + '.view.client.html';
+        }
     }
 
     function NewWidgetController($routeParams, $location, WidgetService) {
@@ -52,8 +57,6 @@
             widget = WidgetService.createWidget(vm.pid, widget);
             if (widget) {
                 $location.url("/user/" + vm.uid + "/website/"  + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
-            } else {
-                vm.error = "Unable to create widget";
             }
         }
     }
@@ -79,8 +82,6 @@
             widget = WidgetService.updateWidget(vm.wgid, widget);
             if (widget) {
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/");
-            } else {
-                vm.error = "Unable to edit widget";
             }
         }
 
@@ -88,8 +89,6 @@
             widget = WidgetService.createWidget(vm.pid, widget);
             if (widget) {
                 $location.url("/user/" + vm.uid + "/website/"  + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
-            } else {
-                vm.error = "Unable to create widget";
             }
         }
 

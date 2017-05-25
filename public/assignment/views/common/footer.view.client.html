@@ -1,4 +1,14 @@
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
+<script>
+    (function() {
+        var loc = window.location.href;
+        if(/page/.test(loc)) {
+            $('#footer').addClass('navbar-widget');
+        } else {
+            $('#footer').addClass('navbar-inverse');
+        }
+    })();
+</script>
+<nav id="footer" class="navbar navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-text pull-right">
             <a href="#/user/{{model.uid}}" class="navbar-link">

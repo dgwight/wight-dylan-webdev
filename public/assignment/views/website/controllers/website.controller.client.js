@@ -32,8 +32,6 @@
             website = WebsiteService.createWebsite(vm.uid, website);
             if (website) {
                 $location.url("/user/" + vm.uid + "/website/"); //+ website._id +"/page");
-            } else {
-                vm.error = "Unable to create website";
             }
         }
     }
@@ -56,8 +54,6 @@
             website = WebsiteService.updateWebsite(vm.uid, website);
             if (website) {
                 $location.url("/user/" + vm.uid + "/website/");
-            } else {
-                vm.error = "Unable to edit website";
             }
         }
 
