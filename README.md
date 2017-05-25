@@ -8,7 +8,12 @@ https://itunes.apple.com/az/app/colorue/id1126469089?mt=8
 I worked on Feedshare, an app for free food at Northeastern, and made the current iphone app for it
 https://itunes.apple.com/us/app/feedshare/id1097335285?mt=8
 
-# Web Development
-This repository is for work done in CS 4550: Web Development, taken Summer 1 2017 at Northern University. 
+# Assignments
+The repository for assignments done in CS 4550: Web Development, taken Summer 1 2017 at Northern University. 
+Github: https://github.com/dylangwight/wight-dylan-webdev
+Deployment: https://wight-dylan-webdev.herokuapp.com/
 
-Link to the deployed site: https://wight-dylan-webdev.herokuapp.com/
+# Project
+The repository for assignments done in CS 4550: Web Development, taken Summer 1 2017 at Northern University. 
+Github: https://github.com/dylangwight/dylquiz
+Deployment: https://dylquiz.herokuapp.com/
