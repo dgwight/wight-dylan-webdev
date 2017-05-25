@@ -25,9 +25,10 @@
     function RegisterController($location, UserService) {
         var vm = this;
         vm.register = register;
+        vm.alert = "Test";
 
         function register(user) {
-            if (user.passord !== user.passwordConfirm) {
+            if (user.password !== user.passwordConfirm) {
                 vm.alert = "Passwords do not match";
                 return;
             }
