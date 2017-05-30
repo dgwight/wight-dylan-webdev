@@ -33,6 +33,8 @@ module.exports = function(app) {
     // }
 
     function findUserByCredentials(req, res) {
+        console.log("findUserByCredentials", req.query);
+
         const username = req.query.username;
         const password = req.query.password;
 
@@ -46,6 +48,8 @@ module.exports = function(app) {
     }
 
     function findUserById(req, res) {
+        console.log("findUserById", req.params);
+
         const userId = req.params.userId;
         for (var i = 0; i < users.length; i++) {
             if (users[i]._id === userId) {

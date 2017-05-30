@@ -14,5 +14,5 @@ require ("./test/app.js")(app);
 var port = process.env.PORT || 3000;
 // app.listen(port);
 
-require("./public/assignment/app.js")(app);
+require("./public/app.js")(app);
 app.listen(port);
