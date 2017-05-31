@@ -20,7 +20,7 @@ module.exports = function(app) {
         console.log("createUser");
         console.log(req.body);
         var newUser = req.body;
-        user._id = user._id ? user._id : new Date().getTime() + "";
+        newUser._id = newUser._id ? newUser._id : new Date().getTime() + "";
         users.push(newUser);
         res.json(newUser);
     }

@@ -3,6 +3,7 @@
  */
 
 module.exports = function(app) {
+    // require("./assignment/services/common.service.server.js")(app);
     require("./assignment/services/user.service.server.js")(app);
     require("./assignment/services/website.service.server.js")(app);
     require("./assignment/services/page.service.server.js")(app);

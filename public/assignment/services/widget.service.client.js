@@ -4,57 +4,21 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .factory("WidgetService", WidgetService);
-    function WidgetService() {
+        .factory("WidgetService", function ($http, CommonService) {
 
-        var api = {
-            "createWidget": createWidget,
-            "findWidgetsByPageId": findWidgetsByPageId,
-            "findWidgetById": findWidgetById,
-            "updateWidget": updateWidget,
-            "deleteWidget": deleteWidget
-        };
-        return api;
+            var api = Object.create(CommonService);
+            api.setObjectName("widget");
+            api.findByPage = findByPage;
 
-        function createWidget(pageId, widget) {
-            widget._id = widget._id ? widget._id : new Date().getTime() + "";
-            widget.pageId = pageId;
-            widgets.push(widget);
-            return widget;
-        }
+            return api;
 
-        function findWidgetsByPageId(pageId) {
-            var pageWidgets = [];
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i].pageId === pageId)
-                    pageWidgets.push(widgets[i]);
+            function findByPage(pageId) {
+                var url = "/api/widget?pageId=" + pageId;
+                return $http.get(url)
+                    .then(function (response) {
+                        return response.data;
+                    });
             }
-            return pageWidgets;
-        }
-
-        function findWidgetById(widgetId) {
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id === widgetId)
-                    return widgets[i];
-            }
-            return null;
-        }
-
-        function updateWidget(widgetId, widget) {
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id === widgetId) {
-                    widgets[i] = widget;
-                    return widgets[i];
-                }
-            }
-        }
-
-        function deleteWidget(widgetId) {
-            for (var i = 0; i < widgets.length; i++) {
-                if (widgets[i]._id === widgetId) {
-                    widgets.splice(i, 1);
-                }
-            }
-        }
-    }
+        });
 })();
+

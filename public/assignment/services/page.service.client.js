@@ -4,57 +4,20 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .factory("PageService", PageService);
-    function PageService() {
+        .factory("PageService", function ($http, CommonService) {
 
-        var api = {
-            "createPage": createPage,
-            "findPageByWebsiteId": findPageByWebsiteId,
-            "findPageById": findPageById,
-            "updatePage": updatePage,
-            "deletePage": deletePage
-        };
-        return api;
+            var api = Object.create(CommonService);
+            api.setObjectName("page");
+            api.findByWebsite = findByWebsite;
 
-        function createPage(websiteId, page) {
-            page._id = page._id ? page._id : new Date().getTime() + "";
-            page.websiteId = websiteId;
-            pages.push(page);
-            return page;
-        }
+            return api;
 
-        function findPageByWebsiteId(websiteId) {
-            var websitePages = [];
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i].websiteId === websiteId)
-                    websitePages.push(pages[i]);
+            function findByWebsite(websiteId) {
+                var url = "/api/page?websiteId=" + websiteId;
+                return $http.get(url)
+                    .then(function (response) {
+                        return response.data;
+                    });
             }
-            return websitePages;
-        }
-
-        function findPageById(pageId) {
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id === pageId)
-                    return pages[i];
-            }
-            return null;
-        }
-
-        function updatePage(pageId, page) {
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id === pageId) {
-                    pages[i] = page;
-                    return pages[i];
-                }
-            }
-        }
-
-        function deletePage(pageId) {
-            for (var i = 0; i < pages.length; i++) {
-                if (pages[i]._id === pageId) {
-                    pages.splice(i, 1);
-                }
-            }
-        }
-    }
+        });
 })();

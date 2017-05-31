@@ -4,57 +4,20 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .factory("WebsiteService", WebsiteService);
-    function WebsiteService() {
+        .factory("PageService", function ($http, CommonService) {
 
-        var api = {
-            "createWebsite": createWebsite,
-            "findWebsitesByUser": findWebsitesByUser,
-            "findWebsiteById": findWebsiteById,
-            "updateWebsite": updateWebsite,
-            "deleteWebsite": deleteWebsite
-        };
-        return api;
+            var api = Object.create(CommonService);
+            api.setObjectName("website");
+            api.findByUser = findByUser;
 
-        function createWebsite(userId, website) {
-            website._id = website._id ? website._id : new Date().getTime() + "";
-            website.developerId = userId;
-            websites.push(website);
-            return website;
-        }
+            return api;
 
-        function findWebsitesByUser(userId) {
-            var userWebsites = [];
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i].developerId === userId)
-                    userWebsites.push(websites[i]);
+            function findByUser(userId) {
+                var url = "/api/website?userId=" + userId;
+                return $http.get(url)
+                    .then(function (response) {
+                        return response.data;
+                    });
             }
-            return userWebsites;
-        }
-
-        function findWebsiteById(websiteId) {
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i]._id === websiteId)
-                    return websites[i];
-            }
-            return null;
-        }
-
-        function updateWebsite(websiteId, website) {
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i]._id === websiteId) {
-                    websites[i] = website;
-                    return websites[i];
-                }
-            }
-        }
-
-        function deleteWebsite(websiteId) {
-            for (var i = 0; i < websites.length; i++) {
-                if (websites[i]._id === websiteId) {
-                    websites.splice(i, 1);
-                }
-            }
-        }
-    }
+        });
 })();

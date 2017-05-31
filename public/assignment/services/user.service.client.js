@@ -4,61 +4,21 @@
 (function () {
     angular
         .module("WebAppMaker")
-        .factory("UserService", UserService);
+        .factory("UserService", function ($http, CommonService) {
 
-    function UserService($http) {
+            var api = Object.create(CommonService);
+            api.setObjectName("user");
+            api.findByUsername = findByUsername;
+            api.findByCredentials = findByCredentials;
 
-        var api = {
-            "createUser": createUser,
-            "findUserById": findUserById,
-            "findUserByUsername": findUserByUsername,
-            "findUserByCredentials": findUserByCredentials,
-            "updateUser": updateUser,
-            "deleteUser": deleteUser
-        };
-        return api;
+            return api;
 
-        function createUser(user) {
-            console.log("createUser", user);
-            var url = "/api/user/";
-            return $http.post(url, user)
-                .then(function (response) {
-                    console.log(response);
-                    return response.data;
-                });
-        }
+            function findByUsername(username) {
+                return api.findByParams({"username": username});
+            }
 
-        function findUserById(id) {
-            console.log("findUserById");
-            var url = "/api/user/" + id;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function findUserByUsername(username) {
-            var url = "/api/user?username=" + username;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function findUserByCredentials(username, password) {
-            var url = "/api/user?username=" + username + "&password=" + password;
-            return $http.get(url)
-                .then(function (response) {
-                    return response.data;
-                });
-        }
-
-        function updateUser(userId, user) {
-
-        }
-
-        function deleteUser(userId) {
-
-        }
-    }
+            function findByCredentials(username, password) {
+                return api.findByParams({"username": username, "password": password});
+            }
+        });
 })();
