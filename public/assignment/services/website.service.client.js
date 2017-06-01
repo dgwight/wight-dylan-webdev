@@ -12,8 +12,8 @@
 
             return api;
 
-            function findByUser(userId) {
-                return api.findByParams({"userId": userId});
+            function findByUser(developerId) {
+                return api.findByParams({"developerId": developerId});
             }
         });
 })();

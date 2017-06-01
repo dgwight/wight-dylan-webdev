@@ -11,6 +11,7 @@
     function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
         vm.uid = $routeParams["uid"];
+
         function init() {
             WebsiteService
                 .findByUser(vm.uid)
@@ -27,7 +28,6 @@
     function NewWebsiteController($routeParams, $location, WebsiteService) {
         var vm = this;
         vm.uid = $routeParams["uid"];
-
         vm.createWebsite = createWebsite;
 
         function init() {
@@ -36,17 +36,21 @@
                 .then(function(websites) {
                     vm.websites = websites;
                 }).catch(function(error) {
-                vm.alert = "Websites not found, please try again";
-            });
+                    vm.alert = "Websites not found, please try again";
+                });
         }
 
         init();
 
         function createWebsite(website) {
-            website = WebsiteService.createWebsite(vm.uid, website);
-            if (website) {
-                $location.url("/user/" + vm.uid + "/website/"); //+ website._id +"/page");
-            }
+            website.developerId = vm.uid;
+            WebsiteService
+                .create(website)
+                .then(function(website) {
+                    $location.url("/user/" + vm.uid + "/website/"); //+ website._id +"/page");
+                }).catch(function(error) {
+                    vm.alert = "Unable to create website, please try again";
+                });
         }
     }
 
@@ -71,22 +75,30 @@
                 .then(function(website) {
                     vm.website = JSON.parse(JSON.stringify(website));
                 }).catch(function(error) {
-                     vm.alert = "Websites not found, please try again";
+                     vm.alert = "Website not found, please try again";
                 });
         }
 
         init();
 
         function updateWebsite(website) {
-            website = WebsiteService.updateWebsite(vm.wid, website);
-            if (website) {
-                $location.url("/user/" + vm.uid + "/website/");
-            }
+            WebsiteService
+                .update(vm.wid, website)
+                .then(function(website) {
+                    $location.url("/user/" + vm.uid + "/website/");
+                }).catch(function(error) {
+                    vm.alert = "Unable to update website, please try again";
+                });
         }
 
         function deleteWebsite() {
-            WebsiteService.deleteWebsite(vm.wid);
-            $location.url("/user/" + vm.uid + "/website/");
+            WebsiteService
+                .remove(vm.wid)
+                .then(function(website) {
+                    $location.url("/user/" + vm.uid + "/website/");
+                }).catch(function(error) {
+                    vm.alert = "Unable to delete website, please try again";
+                });
         }
     }
 

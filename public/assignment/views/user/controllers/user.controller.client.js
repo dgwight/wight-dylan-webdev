@@ -38,7 +38,7 @@
                 .then(function (user) {
                     $location.url('/user/' + user._id);
                 }).catch(function (error) {
-                    vm.alert = "Username " + user.username + " not found, please try again";
+                    vm.alert = "Could not create user, please try again";
                 });
         }
     }
@@ -54,7 +54,7 @@
                 .then(function (user) {
                     vm.user = JSON.parse(JSON.stringify(user));
                 }).catch(function (error) {
-                    vm.alert = "Websites not found, please try again";
+                    vm.alert = "User not found, please try again";
                 });
         }
 
@@ -66,7 +66,7 @@
                 .then(function (user) {
                     vm.alert = "Updated";
                 }).catch(function (error) {
-                    vm.alert = "User " + vm.uid + " not found, please try again";
+                    vm.alert = "User not found, please try again";
                 });
         }
     }

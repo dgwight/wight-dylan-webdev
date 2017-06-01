@@ -13,7 +13,7 @@ function WebsiteService (app) {
         {"_id": "678", "name": "Checkers", "developerId": "123", "description": "Lorem"},
         {"_id": "789", "name": "Chess", "developerId": "234", "description": "Lorem"}
     ];
-    this.prototype = new CommonService(app, "websites", websites);
+    this.prototype = new CommonService(app, "website", websites);
 }
 
 module.exports = WebsiteService;

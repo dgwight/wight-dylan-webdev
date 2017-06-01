@@ -19,21 +19,23 @@ function CommonService(app, objectName, objects) {
     }
 
     function findByParams(req, res) {
-        if (res.query.findAll) {
-            findAllByParams(req, res);
-        } else {
+        console.log(req.query);
+        if (req.query.findOne) {
             findOneByParams(req, res);
+        } else {
+            findAllByParams(req, res);
         }
     }
 
     function findOneByParams(req, res) {
-        console.log("findByParams", objectName, req.query);
+        console.log("findOneByParams", objectName, req.query);
         const keys = Object.keys(req.query);
 
         for (var i = 0; i < objects.length; i++) {
             if (keys.reduce(function (acc, key) {
-                    return acc && (req.query[key] === objects[i][key])
+                    return acc && (req.query[key] === objects[i][key] || key === "findOne")
                 }, true)) {
+                console.log(objects[i]);
                 res.json(objects[i]);
                 return;
             }
@@ -43,13 +45,13 @@ function CommonService(app, objectName, objects) {
     }
 
     function findAllByParams(req, res) {
-        console.log("findByParams", objectName, req.query);
+        console.log("findAllByParams", objectName, req.query);
         const keys = Object.keys(req.query);
         var paramObjects = [];
 
         for (var i = 0; i < objects.length; i++) {
             if (keys.reduce(function (acc, key) {
-                    return acc && (req.query[key] === objects[i][key])
+                    return acc && (req.query[key] === objects[i][key] || key === "findOne")
                 }, true)) {
                 paramObjects.push(objects[i]);
             }
