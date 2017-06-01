@@ -1,12 +1,9 @@
 /**
  * Created by DylanWight on 5/31/17.
  */
-function CommonService(app, objects, objectName) {
+function CommonService(app, objectName, objects) {
 
-    var objectName = objectName;
-    var objects = objects;
-
-    app.get('/api/' + objectName, findByCredentials);
+    app.get('/api/' + objectName, findByParams);
     app.post('/api/' + objectName, create);
     app.get('/api/' + objectName + '/:id', findById);
     app.put('/api/' + objectName + '/:id', update);
@@ -21,19 +18,44 @@ function CommonService(app, objects, objectName) {
         res.json(newUser);
     }
 
-    function findByCredentials(req, res) {
-        console.log("findByCredentials", objectName, req.query);
+    function findByParams(req, res) {
+        if (res.query.findAll) {
+            findAllByParams(req, res);
+        } else {
+            findOneByParams(req, res);
+        }
+    }
 
-        const username = req.query.username;
-        const password = req.query.password;
+    function findOneByParams(req, res) {
+        console.log("findByParams", objectName, req.query);
+        const keys = Object.keys(req.query);
 
         for (var i = 0; i < objects.length; i++) {
-            if (objects[i].username === username && (objects[i].password === password || !password)) {
+            if (keys.reduce(function (acc, key) {
+                    return acc && (req.query[key] === objects[i][key])
+                }, true)) {
                 res.json(objects[i]);
                 return;
             }
         }
+
         res.sendStatus(404);
+    }
+
+    function findAllByParams(req, res) {
+        console.log("findByParams", objectName, req.query);
+        const keys = Object.keys(req.query);
+        var paramObjects = [];
+
+        for (var i = 0; i < objects.length; i++) {
+            if (keys.reduce(function (acc, key) {
+                    return acc && (req.query[key] === objects[i][key])
+                }, true)) {
+                paramObjects.push(objects[i]);
+            }
+        }
+        console.log(paramObjects);
+        res.json(paramObjects);
     }
 
     function findById(req, res) {

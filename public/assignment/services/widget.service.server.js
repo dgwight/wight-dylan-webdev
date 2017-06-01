@@ -1,10 +1,9 @@
 /**
  * Created by DylanWight on 5/30/17.
  */
-module.exports = function(app) {
+var CommonService = require('./common.service.server');
 
-    app.get('/api/widget', findUserById);
-
+function WidgetService (app) {
     var widgets = [
         { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
         { "_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
@@ -16,8 +15,7 @@ module.exports = function(app) {
             "url": "https://youtu.be/AM2Ivdi9c4E" },
         { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
     ];
+    this.prototype = new CommonService(app, "widgets", widgets);
+}
 
-    function findUserById(req, res) {
-        res.send(widgets);
-    }
-};
+module.exports = WidgetService;

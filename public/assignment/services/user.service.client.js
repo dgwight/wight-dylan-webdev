@@ -18,7 +18,7 @@
             }
 
             function findByCredentials(username, password) {
-                return api.findByParams({"username": username, "password": password});
+                return api.findByParams({"username": username, "password": password});;
             }
         });
 })();
