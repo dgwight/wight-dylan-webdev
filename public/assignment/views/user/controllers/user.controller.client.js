@@ -15,19 +15,11 @@
         function login(user) {
             UserService
                 .findByCredentials(user.username, user.password)
-                .then(login, handleError);
-
-            function handleError(error) {
-                vm.alert = "Username " + user.username + " not found, please try again";
-            }
-
-            function login(found) {
-                if (found !== null) {
-                    $location.url('/user/' + found._id);
-                } else {
+                .then(function (user) {
+                    $location.url('/user/' + user._id);
+                }).catch(function (error) {
                     vm.alert = "Username " + user.username + " not found, please try again";
-                }
-            }
+                });
         }
     }
 
@@ -35,27 +27,19 @@
         var vm = this;
         vm.register = register;
 
-        function register(user) {
-            if (user.password !== user.passwordConfirm) {
+        function register(user, passwordConfirm) {
+            if (user.password !== passwordConfirm) {
                 vm.alert = "Passwords do not match";
                 return;
             }
 
             UserService
                 .create(user)
-                .then(register, handleError);
-
-            function handleError(error) {
-                vm.alert = "Username " + user.username + " not found, please try again";
-            }
-
-            function register(found) {
-                if (found) {
-                    $location.url('/user/' + found._id);
-                } else {
-                    vm.alert = "Unable to register, please try again";
-                }
-            }
+                .then(function (user) {
+                    $location.url('/user/' + user._id);
+                }).catch(function (error) {
+                    vm.alert = "Username " + user.username + " not found, please try again";
+                });
         }
     }
 
@@ -67,27 +51,11 @@
         function init() {
             UserService
                 .findById(vm.uid)
-                .then(userFound, handleError);
-
-            function handleError(error) {
-                vm.alert = "User " + vm.uid + " not found, please try again";
-            }
-
-            function userFound(found) {
-                if (found) {
-                    user = found;
-                    vm.user = {
-                        "_id": user._id,
-                        "username": user.username,
-                        "password": user.password,
-                        "firstName": user.firstName,
-                        "lastName": user.lastName,
-                        "email": user.email
-                    };
-                } else {
-                    vm.alert = "User " + vm.uid + " not found, please try again";
-                }
-            }
+                .then(function (user) {
+                    vm.user = JSON.parse(JSON.stringify(user));
+                }).catch(function (error) {
+                    vm.alert = "Websites not found, please try again";
+                });
         }
 
         init();
@@ -95,21 +63,11 @@
         function update(user) {
             UserService
                 .update(user._id, user)
-                .then(userUpdated, handleError);
-
-
-            function handleError(error) {
-                vm.alert = "User " + vm.uid + " not found, please try again";
-            }
-
-            function userUpdated(found) {
-                if (found) {
-
-                } else {
+                .then(function (user) {
+                    vm.alert = "Updated";
+                }).catch(function (error) {
                     vm.alert = "User " + vm.uid + " not found, please try again";
-                }
-            }
+                });
         }
     }
-
 })();

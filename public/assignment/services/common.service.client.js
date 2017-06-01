@@ -8,8 +8,6 @@
 
     function CommonService($http) {
 
-        var objects = [];
-
         var objectName = "";
 
         var api = {

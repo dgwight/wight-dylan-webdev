@@ -13,11 +13,7 @@
             return api;
 
             function findByWebsite(websiteId) {
-                var url = "/api/page?websiteId=" + websiteId;
-                return $http.get(url)
-                    .then(function (response) {
-                        return response.data;
-                    });
+                return api.findByParams({"websiteId": websiteId});
             }
         });
 })();

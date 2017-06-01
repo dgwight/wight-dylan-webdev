@@ -12,8 +12,15 @@
         var vm = this;
         vm.uid = $routeParams["uid"];
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
+            WebsiteService
+                .findByUser(vm.uid)
+                .then(function(websites) {
+                    vm.websites = websites;
+                 }).catch(function(error) {
+                    vm.alert = "Websites not found, please try again";
+                 });
         }
+
         init();
     }
 
@@ -24,8 +31,15 @@
         vm.createWebsite = createWebsite;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
+            WebsiteService
+                .findByUser(vm.uid)
+                .then(function(websites) {
+                    vm.websites = websites;
+                }).catch(function(error) {
+                vm.alert = "Websites not found, please try again";
+            });
         }
+
         init();
 
         function createWebsite(website) {
@@ -44,14 +58,21 @@
         vm.deleteWebsite = deleteWebsite;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesByUser(vm.uid);
-            var website = WebsiteService.findWebsiteById(vm.wid);
-            vm.website = {
-                "_id": website._id,
-                "name": website.name,
-                "developerId": website.developerId,
-                "description": website.description
-            };
+            WebsiteService
+                .findByUser(vm.uid)
+                .then(function(websites) {
+                    vm.websites = websites;
+                }).catch(function(error) {
+                vm.alert = "Websites not found, please try again";
+            });
+
+            WebsiteService
+                .findById(vm.wid)
+                .then(function(website) {
+                    vm.website = JSON.parse(JSON.stringify(website));
+                }).catch(function(error) {
+                     vm.alert = "Websites not found, please try again";
+                });
         }
 
         init();

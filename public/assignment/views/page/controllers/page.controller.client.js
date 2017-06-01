@@ -15,7 +15,7 @@
         vm.wid = $routeParams["wid"];
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
+            vm.pages = PageService.findByWebsiteId(vm.wid);
         }
 
         init();
@@ -60,13 +60,13 @@
                 "websiteId": page.websiteId,
                 "description": page.description
             };
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
+            vm.pages = PageService.findByWebsiteId(vm.wid);
         }
 
         init();
 
         function updatePage(page) {
-            page = PageService.updatePage(vm.pid, page);
+            page = PageService.update(vm.pid, page);
             if (page) {
                 $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/");
             } else {
@@ -75,7 +75,7 @@
         }
 
         function deletePage() {
-            PageService.deletePage(vm.pid);
+            PageService.remove(vm.pid);
             $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/");
         }
     }
