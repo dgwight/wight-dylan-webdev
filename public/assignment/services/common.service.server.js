@@ -9,6 +9,27 @@ function CommonService(app, objectName, objects) {
     app.put('/api/' + objectName + '/:id', update);
     app.delete('/api/' + objectName + '/:id', remove);
 
+    var api = {
+        "getById": getById
+        // "create": create,
+        // "findByParams": findByParams,
+        // "findOneByParams": findOneByParams,
+        // "findAllByParams": findAllByParams,
+        // "findById": findById,
+        // "update": update,
+        // "remove": remove
+    };
+    return api;
+
+    function getById(id) {
+        for (var i = 0; i < objects.length; i++) {
+            if (objects[i]._id === id) {
+                return objects[i];
+            }
+        }
+    }
+
+
     function create(req, res) {
         console.log("create", objectName);
         console.log(req.body);

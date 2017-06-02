@@ -11,7 +11,7 @@
 <div class="form-group">
     <label for="url">URL</label>
     <input ng-model="model.widget.url"
-           type="url" class="form-control" id="url" placeholder="URL">
+           type="text" class="form-control" id="url" placeholder="URL">
 </div>
 <div class="form-group">
     <label for="width">Width</label>
@@ -19,8 +19,14 @@
            type="text" class="form-control" id="width" placeholder="Width">
 </div>
 <div class="form-group">
+<form action="/api/upload"   method="post" enctype="multipart/form-data">
     <label for="upload">Upload</label>
-    <input type="file" class="form-control" id="upload">
+    <input  name="myFile"    type="file" class="form-control" id="upload"/>
+    <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
+    <input  name="userId"    value="{{model.uid}}"   style="display: none"/>
+    <input  name="websiteId" value="{{model.wid}}"   style="display: none"/>
+    <input  name="pageId"    value="{{model.pid}}"   style="display: none"/>
+    <input  name="widgetId"  value="{{model.widget._id}}"   style="display: none"/>
+    <button type="submit"    class="btn btn-block btn-primary">Upload Image</button>
+</form>
 </div>
-<a class="btn btn-primary btn-block"
-   href="#">Upload Image</a>
