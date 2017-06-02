@@ -38,7 +38,8 @@
 
         function getYoutubeEmbedUrl(youTubeLink) {
             var embedUrl = 'https://youtube.com/embed/';
-            var youTubeLinkParts = youTubeLink.split('/');
+            var regex = /([\/\=])/;
+            var youTubeLinkParts = youTubeLink.split(regex);
             var id = youTubeLinkParts[youTubeLinkParts.length - 1];
             embedUrl = embedUrl + id;
             return $sce.trustAsResourceUrl(embedUrl);
@@ -59,11 +60,11 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
-            widget.websiteId = vm.wid;
+            widget.pageId = vm.pid;
             WidgetService
                 .create(widget)
                 .then(function(widget) {
-                    $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/");
+                    $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget/" + widget._id);
                 }).catch(function(error) {
                     vm.alert = "Could not create widget, please try again";
                 });
