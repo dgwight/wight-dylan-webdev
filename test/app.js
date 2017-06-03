@@ -1,5 +1,6 @@
 module.exports = function(app)
 {
+    console.log("test/app.js");
     app.get("/api/test", findAllMessages);
     app.post("/api/test", createMessage);
     app.delete("/api/test/:id", deleteMessage);
@@ -24,6 +25,7 @@ module.exports = function(app)
     var TestModel = mongoose.model("TestModel", TestSchema);
 
     function findAllMessages(req, res) {
+        console.log("findAllMessages");
         TestModel
             .find()
             .then(
@@ -37,6 +39,7 @@ module.exports = function(app)
     }
 
     function createMessage(req, res) {
+        console.log("createMessage");
         TestModel
             .create(req.body)
             .then(
@@ -50,6 +53,7 @@ module.exports = function(app)
     }
 
     function deleteMessage(req, res) {
+        console.log("deleteMessage");
         TestModel
             .remove({_id: req.params.id})
             .then(
