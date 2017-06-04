@@ -10,7 +10,8 @@ function CommonService(app, objectName, objects) {
     app.delete('/api/' + objectName + '/:id', remove);
 
     var api = {
-        "getById": getById
+        "getById": getById,
+        "objects": objects
         // "create": create,
         // "findByParams": findByParams,
         // "findOneByParams": findOneByParams,
@@ -28,7 +29,6 @@ function CommonService(app, objectName, objects) {
             }
         }
     }
-
 
     function create(req, res) {
         console.log("create", objectName);

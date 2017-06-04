@@ -21,6 +21,8 @@ function WidgetService (app) {
     this.prototype = new CommonService(app, "widget", widgets);
 
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    app.put('/api/page/:pid/widget', reorder);
+
 
     function uploadImage(req, res) {
         var widgetId      = req.body.widgetId;
@@ -44,6 +46,28 @@ function WidgetService (app) {
             + "/page/" + pageId + "/widget/" + widgetId;
 
         res.redirect(callbackUrl);
+    }
+
+    function reorder(req, res) {
+        console.log("reorder");
+        const initial = req.query.initial;
+        const final = req.query.final;
+        const pageId = req.params.pid;
+        var widgets = prototype.objects;
+        var pageWidgetIndexes = [];
+        console.log(req.query);
+
+        for (var i = 0; i < widgets.length; i ++) {
+            if (widgets[i].pageId === pageId)
+                pageWidgetIndexes.push(i);
+        }
+
+        console.log(pageWidgetIndexes);
+        var moving = widgets.splice(pageWidgetIndexes[initial], 1);
+        console.log(moving);
+        widgets.splice(pageWidgetIndexes[final], 0, moving);
+        console.log(widgets);
+
     }
 }
 

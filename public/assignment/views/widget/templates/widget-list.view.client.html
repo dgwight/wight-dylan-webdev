@@ -15,9 +15,15 @@
 </nav>
 
 <div class="container">
-    <div ng-repeat="widget in model.widgets">
+    <ul ui-sortable="{{model.pid}}">
+        <li>123</li>
+        <li>234</li>
+        <li>345</li>
+        <li>456</li>
+    </ul>
+    <ul wd-draggable="{{model.pid}}" ng-repeat="widget in model.widgets">
         <ng-include ng-init="tmplUrl = model.getUrlForWidgetType(widget.widgetType);" src="tmplUrl"></ng-include>
-    </div>
+    </ul>
 </div>
 
 <nav class="navbar navbar-widget navbar-fixed-bottom">

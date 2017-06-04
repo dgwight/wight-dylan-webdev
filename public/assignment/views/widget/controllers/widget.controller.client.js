@@ -165,6 +165,7 @@
 
         function selectPhoto(photo) {
             console.log("selectPhoto");
+
             var url = "https://farm" + photo.farm + ".staticflickr.com/" + photo.server;
             url += "/" + photo.id + "_" + photo.secret + "_b.jpg";
             vm.widget.url = url;
