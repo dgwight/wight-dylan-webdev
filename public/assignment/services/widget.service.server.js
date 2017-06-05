@@ -62,12 +62,9 @@ function WidgetService (app) {
                 pageWidgetIndexes.push(i);
         }
 
-        console.log(pageWidgetIndexes);
-        var moving = widgets.splice(pageWidgetIndexes[initial], 1);
-        console.log(moving);
+        var moving = widgets.splice(pageWidgetIndexes[initial], 1)[0];
         widgets.splice(pageWidgetIndexes[final], 0, moving);
-        console.log(widgets);
-
+        res.json(moving);
     }
 }
 
