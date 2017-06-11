@@ -3,7 +3,7 @@
  */
 const mongoose = require("mongoose");
 
-var PageSchema = require("../page/page.schema.server.js")();
+const PageSchema = require("../page/page.schema.server.js");
 
 const WidgetSchema = mongoose.Schema({
     _page: PageSchema,

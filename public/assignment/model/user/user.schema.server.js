@@ -3,7 +3,7 @@
  */
 const mongoose = require("mongoose");
 
-var WebsiteSchema = require("../website/website.schema.server.js")();
+const WebsiteSchema = require("../website/website.schema.server.js");
 
 const UserSchema = mongoose.Schema({
     username: String,
@@ -17,5 +17,3 @@ const UserSchema = mongoose.Schema({
 });
 
 module.exports = UserSchema;
-
-// module.exports = mongoose.model("User", UserSchema);

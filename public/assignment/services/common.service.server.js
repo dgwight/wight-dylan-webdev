@@ -1,129 +1,46 @@
 /**
  * Created by DylanWight on 5/31/17.
  */
-function CommonService(app, objectName, objects) {
+function CommonService(app, Model, routeName) {
 
-    app.get('/api/' + objectName, findByParams);
-    app.post('/api/' + objectName, create);
-    app.get('/api/' + objectName + '/:id', findById);
-    app.put('/api/' + objectName + '/:id', update);
-    app.delete('/api/' + objectName + '/:id', remove);
+    app.get('/api/' + routeName, find);
+    app.get('/api/' + routeName + '/:id', findById);
+    app.post('/api/' + routeName, create);
+    app.put('/api/' + routeName + '/:id', update);
+    app.delete('/api/' + routeName + '/:id', remove);
 
-    var api = {
-        "getById": getById,
-        "objects": objects
-        // "create": create,
-        // "findByParams": findByParams,
-        // "findOneByParams": findOneByParams,
-        // "findAllByParams": findAllByParams,
-        // "findById": findById,
-        // "update": update,
-        // "remove": remove
-    };
-    return api;
-
-    function getById(id) {
-        for (var i = 0; i < objects.length; i++) {
-            if (objects[i]._id === id) {
-                return objects[i];
-            }
-        }
-    }
-
-    function create(req, res) {
-        console.log("create", objectName);
-        console.log(req.body);
-        var newUser = req.body;
-        newUser._id = newUser._id ? newUser._id : new Date().getTime() + "";
-        objects.push(newUser);
-        res.json(newUser);
-    }
-
-    function findByParams(req, res) {
-        console.log(req.query);
-        if (req.query.findOne) {
-            findOneByParams(req, res);
-        } else {
-            findAllByParams(req, res);
-        }
-    }
-
-    function findOneByParams(req, res) {
-        console.log("findOneByParams", objectName, req.query);
-        const keys = Object.keys(req.query);
-
-        for (var i = 0; i < objects.length; i++) {
-            if (keys.reduce(function (acc, key) {
-                    return acc && (req.query[key] === objects[i][key] || key === "findOne")
-                }, true)) {
-                console.log(objects[i]);
-                res.json(objects[i]);
-                return;
-            }
-        }
-
-        res.sendStatus(404);
-    }
-
-    function findAllByParams(req, res) {
-        console.log("findAllByParams", objectName, req.query);
-        const keys = Object.keys(req.query);
-        var paramObjects = [];
-
-        for (var i = 0; i < objects.length; i++) {
-            if (keys.reduce(function (acc, key) {
-                    return acc && (req.query[key] === objects[i][key] || key === "findOne")
-                }, true)) {
-                paramObjects.push(objects[i]);
-            }
-        }
-        console.log(paramObjects);
-        res.json(paramObjects);
+    function find(req, res) {
+        console.log(req.url, req.body);
+        Model.find(req.query).then((err, doc) => respond(err, doc, res));
     }
 
     function findById(req, res) {
-        console.log("findById", objectName, req.params);
+        console.log(req.url, req.params);
+        Model.findById(req.params.id).then((err, doc) => respond(err, doc, res));
+    }
 
-        const id = req.params.id;
-        for (var i = 0; i < objects.length; i++) {
-            if (objects[i]._id === id) {
-                res.json(objects[i]);
-                return;
-            }
-        }
-        res.sendStatus(404);
+    function create(req, res) {
+        console.log(req.url, req.body);
+        Model.create(req.body).then((err, doc) => respond(err, doc, res));
     }
 
     function update(req, res) {
-        console.log("update", objectName);
-        console.log(req.body);
-
-        var id = req.params.id;
-        var newUser = req.body;
-        newUser._id = id;
-
-        for (var i = 0; i < objects.length; i++) {
-            if (objects[i]._id === id) {
-                objects[i] = newUser;
-                res.json(objects[i]);
-                return;
-            }
-        }
-        res.sendStatus(404);
+        console.log(req.url, req.body);
+        Model.update(req.params.id, req.body).then((err, doc) => respond(err, doc, res));
     }
 
     function remove(req, res) {
-        console.log("delete", objectName, req.params.id);
-        var id = req.params.id;
+        console.log(req.url, req.body);
+        Model.remove(req.params.id).then((err, doc) => respond(err, doc, res));
+    }
 
-        for (var i = 0; i < objects.length; i++) {
-            if (objects[i]._id === id) {
-                var deletedUser = objects.splice(i, 1)[0];
-                res.json(deletedUser);
-                return;
-            }
-        }
-        res.sendStatus(404);
+    function respond(err, doc, res) {
+        if (err)
+            res.send(err);
+        else if (doc)
+            res.json(doc);
+        else
+            res.sendStatus(404);
     }
 }
 

@@ -3,8 +3,8 @@
  */
 const mongoose = require("mongoose");
 
-var WebsiteSchema = require("../website/website.schema.server.js")();
-var WidgetSchema = require("../widget/widget.schema.server.js")();
+const WebsiteSchema = require("../website/website.schema.server.js");
+const WidgetSchema = require("../widget/widget.schema.server.js");
 
 const PageSchema = mongoose.Schema({
     _website: WebsiteSchema,
