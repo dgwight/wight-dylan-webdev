@@ -3,10 +3,17 @@
  */
 const mongoose = require("mongoose");
 const CommonModel = require('../common.model.server');
+const UserModel = require('../user/user.model.server')();
+const WebsiteSchema = require("../website/website.schema.server");
 
 function WebsiteModel () {
-    const UserSchema = require("../user/user.schema.server");
-    this.prototype = new CommonModel(mongoose.model("User", UserSchema));
+    this.prototype = new CommonModel(mongoose.model("Website", WebsiteSchema));
+    this.prototype.createWebsite = function(website) {
+        this.prototype.create(website).then((website) => {
+            return UserModel.add(website._user, website, "websites");
+        });
+    };
+
     return this.prototype;
 }
 

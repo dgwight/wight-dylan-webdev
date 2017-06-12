@@ -2,7 +2,6 @@
  * Created by DylanWight on 6/11/17.
  */
 const mongoose = require("mongoose");
-
 const PageSchema = require("../page/page.schema.server.js");
 
 const WidgetSchema = mongoose.Schema({

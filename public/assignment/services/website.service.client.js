@@ -6,14 +6,20 @@
         .module("WebAppMaker")
         .factory("WebsiteService", function ($http, CommonService) {
 
-            var api = Object.create(CommonService);
+            const api = Object.create(CommonService);
             api.setObjectName("website");
             api.findByUser = findByUser;
+            api.createWebsite = createWebsite;
 
             return api;
 
-            function findByUser(developerId) {
-                return api.findByParams({"developerId": developerId});
+            function createWebsite(website, userId) {
+                website._user = userId;
+                return api.create(website);
+            }
+
+            function findByUser(userId) {
+                return api.findByParams({"_user": userId});
             }
         });
 })();

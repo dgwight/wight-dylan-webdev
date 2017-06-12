@@ -1,7 +1,7 @@
 /**
  * Created by DylanWight on 6/11/17.
  */
-function CommonService(Model) {
+function CommonModel(Model) {
 
     const api = {
         "model": Model,
@@ -9,7 +9,8 @@ function CommonService(Model) {
         "findById": findById,
         "create": create,
         "update": update,
-        "remove": remove
+        "remove": remove,
+        "add": add
     };
     return api;
 
@@ -37,6 +38,16 @@ function CommonService(Model) {
         console.log("remove", Model.modelName, id);
         return Model.findByIdAndRemove(id);
     }
+
+    function add(id, object, fieldName) {
+        console.log("add", Model.modelName, id, object, fieldName);
+        return Model.update(
+            { _id: _id },
+            { $push: { fieldName: object } }
+        ).then((website) => {
+            return object;
+        });
+    }
 }
 
-module.exports = CommonService;
+module.exports = CommonModel;

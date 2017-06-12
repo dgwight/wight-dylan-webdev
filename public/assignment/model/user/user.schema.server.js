@@ -2,7 +2,6 @@
  * Created by DylanWight on 6/11/17.
  */
 const mongoose = require("mongoose");
-
 const WebsiteSchema = require("../website/website.schema.server.js");
 
 const UserSchema = mongoose.Schema({

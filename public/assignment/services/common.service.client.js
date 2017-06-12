@@ -10,12 +10,11 @@
 
         var objectName = "";
 
-        var api = {
+        const api = {
             "setObjectName": setObjectName,
             "create": create,
             "findById": findById,
             "findByParams": findByParams,
-            "findOneByParams": findOneByParams,
             "update": update,
             "remove": remove
         };
@@ -52,11 +51,6 @@
                 .then(function (response) {
                     return response.data;
                 });
-        }
-
-        function findOneByParams(params) {
-            params.findOne = true;
-            return findByParams(params);
         }
 
         function update(id, object) {

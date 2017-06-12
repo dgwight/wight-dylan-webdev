@@ -14,11 +14,11 @@
             return api;
 
             function findByUsername(username) {
-                return api.findOneByParams({"username": username});
+                return api.findByParams({"username": username});
             }
 
             function findByCredentials(username, password) {
-                return api.findOneByParams({"username": username, "password": password});
+                return api.findByParams({"username": username, "password": password});
             }
         });
 })();

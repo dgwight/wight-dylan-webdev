@@ -43,9 +43,8 @@
         init();
 
         function createWebsite(website) {
-            website.developerId = vm.uid;
             WebsiteService
-                .create(website)
+                .createWebsite(website, vm.uid)
                 .then(function(website) {
                     $location.url("/user/" + vm.uid + "/website/"); //+ website._id +"/page");
                 }).catch(function(error) {
