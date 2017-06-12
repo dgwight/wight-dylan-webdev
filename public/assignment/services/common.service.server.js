@@ -37,10 +37,8 @@ function CommonService(app, Model, routeName) {
     function respond(err, doc, res) {
         if (err)
             res.send(err);
-        else if (doc) {
-            console.log(doc);
+        else if (doc)
             res.json(doc);
-        }
         else
             res.sendStatus(404);
     }

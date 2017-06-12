@@ -7,14 +7,18 @@ const UserModel = require('../user/user.model.server')();
 const WebsiteSchema = require("../website/website.schema.server");
 
 function WebsiteModel () {
-    this.prototype = new CommonModel(mongoose.model("Website", WebsiteSchema));
-    this.prototype.createWebsite = function(website) {
-        this.prototype.create(website).then((website) => {
-            return UserModel.add(website._user, website, "websites");
-        });
-    };
+    const Model = mongoose.model("Website", WebsiteSchema);
+    var WebsiteModel = new CommonModel(Model);
+    WebsiteModel.create = create;
 
-    return this.prototype;
+    return WebsiteModel;
+
+    function create(website) {
+        return Model.create(website).then((website) => {
+            UserModel.add(website._user, website._id, "websites");
+            return website;
+        });
+    }
 }
 
 module.exports = WebsiteModel;

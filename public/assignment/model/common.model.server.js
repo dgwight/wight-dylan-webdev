@@ -7,17 +7,17 @@ function CommonModel(Model) {
         "model": Model,
         "find": find,
         "findById": findById,
-        "create": create,
+        // "create": create,
         "update": update,
         "remove": remove,
         "add": add
     };
     return api;
 
-    function create(object) {
-        console.log("create", Model.modelName, object);
-        return Model.create(object);
-    }
+    // function create(object) {
+    //     console.log("create", Model.modelName, object);
+    //     return Model.create(object);
+    // }
 
     function find(query) {
         console.log("findByParams", Model.modelName, query);
@@ -41,12 +41,11 @@ function CommonModel(Model) {
 
     function add(id, object, fieldName) {
         console.log("add", Model.modelName, id, object, fieldName);
-        return Model.update(
-            { _id: _id },
-            { $push: { fieldName: object } }
-        ).then((website) => {
-            return object;
-        });
+        return Model.findByIdAndUpdate(
+                id,
+                {$push: {fieldName: object}},
+                {safe: true, upsert: true},
+            );
     }
 }
 
