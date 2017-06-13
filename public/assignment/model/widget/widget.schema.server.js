@@ -6,7 +6,7 @@ const PageSchema = require("../page/page.schema.server.js");
 
 const WidgetSchema = mongoose.Schema({
     _page: PageSchema,
-    type: {type: String, enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT']},
+    type: {type: String, enum: ['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'TEXT']},
     name: String,
     text: String,
     placeholder: String,
