@@ -61,7 +61,7 @@
         vm.createWidget = createWidget;
 
         function createWidget(widget) {
-            widget.pageId = vm.pid;
+            widget._page = vm.pid;
             WidgetService
                 .create(widget)
                 .then(function(widget) {
@@ -107,7 +107,7 @@
         }
 
         function createWidget(widget) {
-            widget.pageId = vm.pid;
+            widget._page = vm.pid;
             WidgetService
                 .create(widget)
                 .then(function(widget) {

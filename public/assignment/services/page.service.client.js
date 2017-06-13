@@ -13,7 +13,7 @@
             return api;
 
             function findByWebsite(websiteId) {
-                return api.findByParams({"websiteId": websiteId});
+                return api.findByParams({"_website": websiteId});
             }
         });
 })();

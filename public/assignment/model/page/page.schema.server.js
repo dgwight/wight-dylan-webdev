@@ -10,7 +10,7 @@ const PageSchema = mongoose.Schema({
     name: String,
     title: String,
     description: String,
-    pages: [WidgetSchema],
+    widgets: [WidgetSchema],
     dateCreated: {type: Date, default: Date.now}
 });
 

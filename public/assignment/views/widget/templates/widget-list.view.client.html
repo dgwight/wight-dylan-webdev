@@ -17,7 +17,7 @@
 <div class="container">
     <div wd-draggable="{{model.pid}}">
         <ul ng-repeat="widget in model.widgets">
-            <ng-include ng-init="tmplUrl = model.getUrlForWidgetType(widget.widgetType);" src="tmplUrl"></ng-include>
+            <ng-include ng-init="tmplUrl = model.getUrlForWidgetType(widget.type);" src="tmplUrl"></ng-include>
         </ul>
     </div>
 </div>

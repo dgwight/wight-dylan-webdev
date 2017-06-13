@@ -47,7 +47,7 @@
         init();
 
         function createPage(page) {
-            page.websiteId = vm.wid;
+            page._website = vm.wid;
             PageService
                 .create(page)
                 .then(function (page) {

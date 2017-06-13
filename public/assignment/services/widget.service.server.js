@@ -8,11 +8,10 @@ function WidgetService (app) {
 
     const CommonService = require('./common.service.server');
     const WidgetModel = require("../model/widget/widget.model.server")();
-    this.prototype = new CommonService(app, WidgetModel, "widget");
+    const Model = new CommonService(app, WidgetModel, "widget");
 
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
     app.put('/api/page/:pid/widget', reorder);
-
 
     function uploadImage(req, res) {
         var widgetId      = req.body.widgetId;
@@ -30,7 +29,7 @@ function WidgetService (app) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
-        widget = prototype.getById(widgetId);
+        widget = Model.getById(widgetId);
         widget.url = '/public/uploads/' + filename;
         var callbackUrl = "/assignment/index.html#/user/" + userId + "/website/" + websiteId
             + "/page/" + pageId + "/widget/" + widgetId;
@@ -43,6 +42,7 @@ function WidgetService (app) {
         const initial = req.query.initial;
         const final = req.query.final;
         const pageId = req.params.pid;
+
         var widgets = prototype.objects;
         var pageWidgetIndexes = [];
         console.log(req.query);

@@ -10,13 +10,11 @@ function WebsiteModel () {
     const Model = mongoose.model("Website", WebsiteSchema);
     var WebsiteModel = new CommonModel(Model);
     WebsiteModel.create = create;
-
     return WebsiteModel;
 
     function create(website) {
         return Model.create(website).then((website) => {
-            UserModel.add(website._user, website._id, "websites");
-            return website;
+            UserModel.add(website._user, website, "websites");
         });
     }
 }

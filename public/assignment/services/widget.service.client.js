@@ -14,7 +14,7 @@
             return api;
 
             function findByPage(pageId) {
-                return api.findByParams({"pageId": pageId});
+                return api.findByParams({"_page": pageId});
             }
 
             function reorder(pageId, initial, final) {

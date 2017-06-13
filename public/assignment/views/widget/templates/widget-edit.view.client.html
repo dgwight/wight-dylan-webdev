@@ -18,7 +18,7 @@
     <section class="intro">
         <div class="col-xs-3 hidden-xs sidebar">
             <ul class="list-group">
-                <li><a ng-click="model.createWidget({'widgetType': 'HEADING'})">
+                <li><a ng-click="model.createWidget({'type': 'HEADING'})">
                     Header
                 </a></li>
                 <li><a>
@@ -36,10 +36,10 @@
                 <li><a>
                     Button
                 </a></li>
-                <li><a ng-click="model.createWidget({'widgetType': 'IMAGE'})">
+                <li><a ng-click="model.createWidget({'type': 'IMAGE'})">
                     Image
                 </a></li>
-                <li><a ng-click="model.createWidget({'widgetType': 'YOUTUBE'})">
+                <li><a ng-click="model.createWidget({'type': 'YOUTUBE'})">
                     Youtube
                 </a></li>
                 <li><a>
@@ -51,7 +51,7 @@
             </ul>
         </div>
         <div class="col-xs-12 col-sm-9">
-            <div ng-switch="model.widget.widgetType">
+            <div ng-switch="model.widget.type">
                 <div ng-switch-when="HEADING">
                     <ng-include src="'views/widget/templates/widget-heading-edit.view.client.html'"></ng-include>
                 </div>
