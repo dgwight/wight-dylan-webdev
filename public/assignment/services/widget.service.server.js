@@ -14,27 +14,27 @@ function WidgetService (app) {
     app.put('/api/page/:pid/widget', reorder);
 
     function uploadImage(req, res) {
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
-        var myFile        = req.file;
+        const widgetId      = req.body.widgetId;
+        const width         = req.body.width;
+        const myFile        = req.file;
 
-        var userId = req.body.userId;
-        var websiteId = req.body.websiteId;
-        var pageId = req.body.pageId;
+        const userId = req.body.userId;
+        const websiteId = req.body.websiteId;
+        const pageId = req.body.pageId;
 
-        var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
+        const originalname  = myFile.originalname; // file name on user's computer
+        const filename      = myFile.filename;     // new file name in upload folder
+        const path          = myFile.path;         // full path of uploaded file
+        const destination   = myFile.destination;  // folder where file is saved to
+        const size          = myFile.size;
+        const mimetype      = myFile.mimetype;
 
-        widget = Model.getById(widgetId);
-        widget.url = '/public/uploads/' + filename;
-        var callbackUrl = "/assignment/index.html#/user/" + userId + "/website/" + websiteId
-            + "/page/" + pageId + "/widget/" + widgetId;
-
-        res.redirect(callbackUrl);
+        WidgetModel.update(widgetId, {url: '/public/uploads/' + filename})
+            .then((widget) => {
+                const callbackUrl = "/assignment/index.html#/user/" + userId + "/website/" + websiteId
+                    + "/page/" + pageId + "/widget/" + widgetId;
+                res.redirect(callbackUrl);
+            });
     }
 
     function reorder(req, res) {
