@@ -8,7 +8,6 @@ function WidgetService (app) {
 
     const CommonService = require('./common.service.server');
     const WidgetModel = require("../model/widget/widget.model.server")();
-    const PageModel = require("../model/page/page.model.server");
     const Model = new CommonService(app, WidgetModel, "widget");
 
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
@@ -46,8 +45,8 @@ function WidgetService (app) {
 
         WidgetModel.find({_page: pageId})
             .then((widgets) => {
-                console.log(widgets[initial].order);
-                const order = initial > final ? widgets[final].order - 1 ? ;
+                const preorder = final > 0 ? widgets[final - 1].order : 0;
+                const order = (final == widgets.length - 1) ? new Date().getTime() : (preorder + widgets[final].order) / 2;
                 return WidgetModel.update(widgets[initial]._id, {order: order})
             }).then((widget) => {
                 console.log(widget.order);
