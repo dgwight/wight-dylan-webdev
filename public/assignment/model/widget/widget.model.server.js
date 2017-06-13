@@ -3,9 +3,9 @@
  */
 const mongoose = require("mongoose");
 const CommonModel = require('../common.model.server');
-const PageModel = require('../page/page.model.server')();
 
 function WidgetModel () {
+    const PageModel = require('../page/page.model.server');
     const WidgetSchema = require("../widget/widget.schema.server");
     const Model = mongoose.model("Widget", WidgetSchema);
     const WidgetModel = new CommonModel(Model);

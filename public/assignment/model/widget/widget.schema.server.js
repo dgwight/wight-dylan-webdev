@@ -20,6 +20,7 @@ const WidgetSchema = mongoose.Schema({
     icon: String,
     deletable: Boolean,
     formatted: Boolean,
+    order: {type: Date, default: Date.now},
     dateCreated: {type: Date, default: Date.now}
 });
 

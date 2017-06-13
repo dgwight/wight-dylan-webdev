@@ -3,7 +3,7 @@
  */
 function PageService (app) {
     const CommonService = require('./common.service.server');
-    const PageModel = require("../model/page/page.model.server")();
+    const PageModel = require("../model/page/page.model.server");
     this.prototype = new CommonService(app, PageModel, "page");
 }
 

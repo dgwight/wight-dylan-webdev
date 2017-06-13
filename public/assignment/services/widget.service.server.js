@@ -8,6 +8,7 @@ function WidgetService (app) {
 
     const CommonService = require('./common.service.server');
     const WidgetModel = require("../model/widget/widget.model.server")();
+    const PageModel = require("../model/page/page.model.server");
     const Model = new CommonService(app, WidgetModel, "widget");
 
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
@@ -43,18 +44,24 @@ function WidgetService (app) {
         const final = req.query.final;
         const pageId = req.params.pid;
 
-        var widgets = prototype.objects;
-        var pageWidgetIndexes = [];
-        console.log(req.query);
+        WidgetModel.find({_page: pageId})
+            .then((widgets) => {
+                console.log(widgets[initial].order);
+                const order = initial > final ? widgets[final].order - 1 ? ;
+                return WidgetModel.update(widgets[initial]._id, {order: order})
+            }).then((widget) => {
+                console.log(widget.order);
+                res.json(widget)
+            });
+    }
 
-        for (var i = 0; i < widgets.length; i ++) {
-            if (widgets[i].pageId === pageId)
-                pageWidgetIndexes.push(i);
-        }
-
-        var moving = widgets.splice(pageWidgetIndexes[initial], 1)[0];
-        widgets.splice(pageWidgetIndexes[final], 0, moving);
-        res.json(moving);
+    function respond(err, doc, res) {
+        if (err)
+            res.send(err);
+        else if (doc)
+            res.json(doc);
+        else
+            res.sendStatus(404);
     }
 }
 

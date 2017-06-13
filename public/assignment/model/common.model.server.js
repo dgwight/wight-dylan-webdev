@@ -15,7 +15,7 @@ function CommonModel(Model) {
 
     function find(query) {
         console.log("findByParams", Model.modelName, query);
-        return Model.find(query);
+        return Model.find(query).sort( { order: 1 } );
     }
 
     function findById(id) {
