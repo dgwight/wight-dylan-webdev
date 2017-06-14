@@ -10,27 +10,26 @@
             .when("/", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "LoginController",
-                controllerAs: "model"
-            })
-            .when("default", {
-                templateUrl: "views/user/templates/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: { loggedin: autoLogin }
             })
             .when("/login", {
                 templateUrl: "views/user/templates/login.view.client.html",
                 controller: "LoginController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: { loggedin: autoLogin }
             })
             .when("/register", {
                 templateUrl: "views/user/templates/register.view.client.html",
                 controller: "RegisterController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: { loggedin: autoLogin }
             })
             .when("/user/:uid", {
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: { loggedin: checkLoggedin }
             })
             .when("/user/:uid/website", {
                 templateUrl: "views/website/templates/website-list.view.client.html",
@@ -82,5 +81,36 @@
                 controller: "EditWidgetController",
                 controllerAs: "model"
             })
+
+        function checkLoggedin($q, $timeout, $http, $location, $rootScope) {
+            var deferred = $q.defer();
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.currentUser = user;
+                    deferred.resolve();
+                } else {
+                    console.log("rejected");
+                    deferred.reject();
+                    $location.url('/');
+                }
+            });
+            return deferred.promise;
+        }
+
+        function autoLogin($q, $timeout, $http, $location, $rootScope) {
+            var deferred = $q.defer();
+            $http.get('/api/loggedin').success(function(user) {
+                $rootScope.errorMessage = null;
+                if (user !== '0') {
+                    $rootScope.currentUser = user;
+                    $location.url('/user/' + user._id);
+                    deferred.resolve();
+                } else {
+                    deferred.resolve();
+                }
+            });
+            return deferred.promise;
+        }
     }
 })();

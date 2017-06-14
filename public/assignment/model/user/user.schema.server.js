@@ -12,6 +12,10 @@ const UserSchema = mongoose.Schema({
     email: String,
     phone: String,
     websites: [WebsiteSchema],
+    facebook: {
+        id:    String,
+        token: String
+    },
     dateCreated: {type: Date, default: Date.now}
 });
 

@@ -9,12 +9,18 @@ function UserModel() {
     const Model = mongoose.model("User", UserSchema);
     const UserModel = new CommonModel(Model);
     UserModel.create = create;
+    UserModel.findByFacebookId = findByFacebookId;
+
     return UserModel;
 
     function create(user) {
         return Model.create(user).then((user) => {
             return user;
         });
+    }
+
+    function findByFacebookId(facebookId) {
+        return Model.findOne({'facebook.id': facebookId});
     }
 }
 
