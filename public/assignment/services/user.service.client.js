@@ -10,6 +10,7 @@
             api.setObjectName("user");
             api.findByUsername = findByUsername;
             api.findByCredentials = findByCredentials;
+            api.login = login;
 
             return api;
 
@@ -19,6 +20,11 @@
 
             function findByCredentials(username, password) {
                 return api.findByParams({"username": username, "password": password});
+            }
+
+            function login(user) {
+                console.log("login user: ", user.username, user.password);
+                return $http.post("/api/login", user);
             }
         });
 })();
