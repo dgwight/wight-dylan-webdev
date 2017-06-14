@@ -5,16 +5,18 @@
 function UserService (app) {
 
     var passport = require('passport');
+    var bcrypt = require("bcrypt-nodejs");
     var FacebookStrategy = require('passport-facebook').Strategy;
     var LocalStrategy = require('passport-local').Strategy;
     const CommonService = require('./common.service.server');
     const UserModel = require("../model/user/user.model.server")();
     var UserService = new CommonService(app, UserModel, "user");
 
+
     const facebookConfig = {
-        clientID     : process.env.FACEBOOK_CLIENT_ID ? process.env.FACEBOOK_CLIENT_ID : "259498987885158",
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET ? process.env.FACEBOOK_CLIENT_SECRET : "dc26f181cd4577ae252303900ba93d39",
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL ? process.env.FACEBOOK_CALLBACK_URL : "/auth/facebook/callback"
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
     };
 
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -33,9 +35,9 @@ function UserService (app) {
 
     function localStrategy(username, password, done) {
         UserModel
-            .find({username: username, password: password})
+            .find({username: username})
             .then(function(users) {
-                    if(users[0].username === username && users[0].password === password) {
+                    if(users[0] && bcrypt.compareSync(password, users[0].password)) {
                         return done(null, users[0]);
                     } else {
                         return done(null, false);
@@ -89,6 +91,7 @@ function UserService (app) {
 
     function register (req, res) {
         var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
         UserModel
             .create(user)
             .then(function(user){

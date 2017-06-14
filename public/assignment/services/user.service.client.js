@@ -13,7 +13,7 @@
             UserService.logout = logout;
             UserService.register = register;
 
-            return PageService;
+            return UserService;
 
             function findByUsername(username) {
                 return UserService.findByParams({"username": username});

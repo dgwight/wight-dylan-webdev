@@ -2,7 +2,6 @@
  * Created by DylanWight on 5/31/17.
  */
 function CommonService(app, Model, routeName) {
-    console.log("service", routeName);
 
     app.get('/api/' + routeName, find);
     app.get('/api/' + routeName + '/:id', findById);
