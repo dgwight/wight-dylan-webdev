@@ -11,6 +11,7 @@
             api.findByUsername = findByUsername;
             api.findByCredentials = findByCredentials;
             api.login = login;
+            api.logout = logout;
 
             return api;
 
@@ -25,6 +26,10 @@
             function login(user) {
                 console.log("login user: ", user.username, user.password);
                 return $http.post("/api/login", user);
+            }
+
+            function logout(user) {
+                return $http.post("/api/logout");
             }
         });
 })();

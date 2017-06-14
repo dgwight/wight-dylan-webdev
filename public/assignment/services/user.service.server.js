@@ -12,6 +12,7 @@ function UserService (app) {
     var UserService = new CommonService(app, UserModel, "user");
 
     app.post  ('/api/login', passport.authenticate('local'), login);
+    app.post('/api/logout', logout);
 
     function localStrategy(username, password, done) {
         UserModel
@@ -34,6 +35,11 @@ function UserService (app) {
         res.json(user);
     }
 
+    function logout(req, res) {
+        console.log("logout");
+        req.logOut();
+        res.send(200);
+    }
 
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
