@@ -26,7 +26,7 @@
         }
     }
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, $rootScope, UserService) {
         var vm = this;
         vm.register = register;
 
@@ -37,12 +37,12 @@
             }
 
             UserService
-                .create(user)
-                .then(function (user) {
-                    $location.url('/user/' + user._id);
-                }).catch(function (error) {
-                    vm.alert = "Could not create user, please try again";
-                });
+                .register(user)
+                .then(function(response) {
+                        const user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/" + user._id);
+                    });
         }
     }
 
@@ -78,9 +78,9 @@
             UserService
                 .logout()
                 .then(function (response) {
-                        $rootScope.currentUser = null;
-                        $location.url("/");
-                    })
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                })
         }
     }
 })();

@@ -12,6 +12,7 @@
             api.findByCredentials = findByCredentials;
             api.login = login;
             api.logout = logout;
+            api.register = register;
 
             return api;
 
@@ -30,6 +31,10 @@
 
             function logout(user) {
                 return $http.post("/api/logout");
+            }
+
+            function register(user) {
+                return $http.post("/api/register", user);
             }
         });
 })();
