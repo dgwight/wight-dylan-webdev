@@ -53,15 +53,6 @@ function WidgetService (app) {
                 res.json(widget)
             });
     }
-
-    function respond(err, doc, res) {
-        if (err)
-            res.send(err);
-        else if (doc)
-            res.json(doc);
-        else
-            res.sendStatus(404);
-    }
 }
 
 module.exports = WidgetService;

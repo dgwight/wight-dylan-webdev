@@ -6,14 +6,12 @@
         .module("WebAppMaker")
         .factory("PageService", function ($http, CommonService) {
 
-            var api = Object.create(CommonService);
-            api.setObjectName("page");
-            api.findByWebsite = findByWebsite;
-
-            return api;
+            const PageService = CommonService("page");
+            PageService.findByWebsite = findByWebsite;
+            return PageService;
 
             function findByWebsite(websiteId) {
-                return api.findByParams({"_website": websiteId});
+                return PageService.findByParams({"_website": websiteId});
             }
         });
 })();

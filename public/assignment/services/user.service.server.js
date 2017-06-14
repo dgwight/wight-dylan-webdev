@@ -17,23 +17,16 @@ function UserService (app) {
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL ? process.env.FACEBOOK_CALLBACK_URL : "/auth/facebook/callback"
     };
 
-    console.log(facebookConfig);
-
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.use(new LocalStrategy(localStrategy));
 
     app.post  ('/api/login', passport.authenticate('local'), login);
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    app.get('/auth/facebook/callback', function(req,res,next) {
-        // console.log("============", req);
-        passport.authenticate(
-            'facebook',
-            {
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
                 successRedirect:"/assignment/#/login",
                 failureRedirect:"/assignment/#/login"
             }
-        ) (req,res,next);
-    });
+        ));
     app.post('/api/logout', logout);
     app.post ('/api/register', register);
     app.get ('/api/loggedin', loggedin);

@@ -6,22 +6,21 @@
         .module("WebAppMaker")
         .factory("UserService", function ($http, CommonService) {
 
-            var api = Object.create(CommonService);
-            api.setObjectName("user");
-            api.findByUsername = findByUsername;
-            api.findByCredentials = findByCredentials;
-            api.login = login;
-            api.logout = logout;
-            api.register = register;
+            const UserService = CommonService("user");
+            UserService.findByUsername = findByUsername;
+            UserService.findByCredentials = findByCredentials;
+            UserService.login = login;
+            UserService.logout = logout;
+            UserService.register = register;
 
-            return api;
+            return PageService;
 
             function findByUsername(username) {
-                return api.findByParams({"username": username});
+                return UserService.findByParams({"username": username});
             }
 
             function findByCredentials(username, password) {
-                return api.findByParams({"username": username, "password": password});
+                return UserService.findByParams({"username": username, "password": password});
             }
 
             function login(user) {

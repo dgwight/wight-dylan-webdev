@@ -6,15 +6,13 @@
         .module("WebAppMaker")
         .factory("WidgetService", function ($http, CommonService) {
 
-            var api = Object.create(CommonService);
-            api.setObjectName("widget");
-            api.findByPage = findByPage;
-            api.reorder = reorder;
-
-            return api;
+            const WidgetService = CommonService("widget");
+            WidgetService.findByPage = findByPage;
+            WidgetService.reorder = reorder;
+            return WidgetService;
 
             function findByPage(pageId) {
-                return api.findByParams({"_page": pageId});
+                return WidgetService.findByParams({"_page": pageId});
             }
 
             function reorder(pageId, initial, final) {

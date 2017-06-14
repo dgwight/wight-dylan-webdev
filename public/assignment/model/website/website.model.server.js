@@ -15,6 +15,7 @@ function WebsiteModel () {
     function create(website) {
         return Model.create(website).then((website) => {
             UserModel.add(website._user, website, "websites");
+            return website;
         });
     }
 }
