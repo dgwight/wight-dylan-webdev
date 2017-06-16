@@ -43,6 +43,11 @@
         init();
 
         function createWebsite(website) {
+            if (!website || !website.name) {
+                vm.alert = "Website name required";
+                return;
+            }
+
             WebsiteService
                 .createWebsite(website, vm.uid)
                 .then(function(website) {

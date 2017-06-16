@@ -90,7 +90,6 @@
                     $rootScope.currentUser = user;
                     deferred.resolve();
                 } else {
-                    console.log("rejected");
                     deferred.reject();
                     $location.url('/');
                 }

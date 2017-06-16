@@ -13,11 +13,19 @@
         vm.login = login;
 
         function login(user) {
+            console.log(user);
+            if (!user || !user.username) {
+                vm.alert = "Username is required";
+                return;
+            } else if (!user.password) {
+                vm.alert = "Password is required";
+                return;
+            }
+
             UserService
                 .login(user)
                 .then(function (response) {
                     const user = response.data;
-                    console.log(user);
                     $rootScope.currentUser = user;
                     $location.url('/user/' + user._id);
                 }).catch(function (error) {
@@ -31,7 +39,13 @@
         vm.register = register;
 
         function register(user, passwordConfirm) {
-            if (user.password !== passwordConfirm) {
+            if (!user || !user.username) {
+                vm.alert = "Username required";
+                return;
+            } else if (!user.password) {
+                vm.alert = "Password required";
+                return;
+            } else if (user.password !== passwordConfirm) {
                 vm.alert = "Passwords do not match";
                 return;
             }
