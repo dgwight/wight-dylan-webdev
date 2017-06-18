@@ -47,6 +47,11 @@
         init();
 
         function createPage(page) {
+            if (!page || !page.name) {
+                vm.alert = "Page name required";
+                return;
+            }
+
             page._website = vm.wid;
             PageService
                 .create(page)
@@ -87,6 +92,11 @@
         init();
 
         function updatePage(page) {
+            if (!page || !page.name) {
+                vm.alert = "Page name required";
+                return;
+            }
+
             PageService
                 .update(vm.pid, page)
                 .then(function (page) {

@@ -86,6 +86,11 @@
         init();
 
         function updateWebsite(website) {
+            if (!website || !website.name) {
+                vm.alert = "Website name required";
+                return;
+            }
+
             WebsiteService
                 .update(vm.wid, website)
                 .then(function(website) {

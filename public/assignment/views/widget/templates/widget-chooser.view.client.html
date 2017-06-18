@@ -10,6 +10,7 @@
 </nav>
 
 <div class="container">
+    <div class="alert alert-danger" ng-show="model.alert">{{model.alert}}</div>
     <ul class="list-group">
         <li><a ng-click="model.createWidget({'type': 'HEADING'})">
             Header

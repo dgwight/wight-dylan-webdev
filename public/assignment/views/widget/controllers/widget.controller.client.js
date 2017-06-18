@@ -96,7 +96,6 @@
         init();
 
         function updateWidget(widget) {
-            console.log("update", widget);
             WidgetService
                 .update(vm.wgid, widget)
                 .then(function(widget) {
