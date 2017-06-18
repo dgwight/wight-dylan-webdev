@@ -79,13 +79,21 @@
         init();
 
         function update(user) {
+            if (!user || !user.username) {
+                vm.alert = "Username required";
+                vm.message = null;
+                return;
+            }
+
             UserService
                 .update(user._id, user)
                 .then(function (user) {
-                    vm.alert = "Updated";
+                    vm.alert = null;
+                    vm.message = "Updated user";
                 }).catch(function (error) {
                     vm.alert = "User not found, please try again";
-                });
+                    vm.message = null;
+            });
         }
 
         function logout() {

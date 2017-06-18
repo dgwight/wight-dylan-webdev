@@ -13,6 +13,8 @@
 
 <div class="container">
     <form>
+        <div class="alert alert-danger" ng-show="model.alert">{{model.alert}}</div>
+        <div class="alert alert-info" ng-show="model.message">{{model.message}}</div>
         <div class="form-group">
             <label for="username">Username</label>
             <input ng-model="model.user.username" type="text" class="form-control" id="username" placeholder="Username">
